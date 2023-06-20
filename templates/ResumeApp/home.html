@@ -1,0 +1,53 @@
+{% extends 'ResumeApp/base.html' %}
+
+
+{% block css %}
+{% endblock css %}
+
+{% block js %}
+<script>
+    $(document).ready(function(){
+        $( "#id_dob" ).datepicker({changeMonth:true, changeYear:true,yearRange: '1950:2049'});
+
+    
+    })
+</script>
+
+{% endblock js %}
+
+{% block title %}
+<title>Home Page</title>
+{% endblock title %}
+
+
+
+{% block body %}
+<div class="container mt-3">
+    <!-- Header -->
+<div class="container bg-secondary shadow rounded-3">
+    <h1 class="text-center text-light">Upload Resume</h1>
+</div>
+
+<div class="container shadow w-50">
+    <form action="{% url 'home' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% for i in forms %}
+        <div class="mb-3">
+            {{i.label_tag}}
+            {{i}}
+            <span style="color: red;">{{i.errors}}</span>
+
+    
+        </div>
+        {% endfor %}
+
+        <div class="mb-3 text-center">
+
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
+
+    </form>
+</div>
+
+</div>
+{% endblock body %}
